@@ -82,8 +82,9 @@ class HTTPConnection(httplib.HTTPConnection):
         if self._tunnel_host:
             self._tunnel()
 
+HTTPSLibConnection = httplib.HTTPConnection
 
-class HTTPSConnection(HTTPConnection):
+class HTTPSConnection(httplib.HTTPSConnection):
 
     default_port = 443
 
@@ -91,6 +92,8 @@ class HTTPSConnection(HTTPConnection):
         HTTPConnection.__init__(self, host, port, **kw)
         self.key_file = key_file
         self.cert_file = cert_file
+        if not hasattr(self, "source_address"):
+            self.source_address = None
 
     def connect(self):
         "Connect to a host on a given (SSL) port."
