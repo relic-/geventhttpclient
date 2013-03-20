@@ -89,7 +89,7 @@ class HTTPSConnection(httplib.HTTPSConnection):
     default_port = 443
 
     def __init__(self, host, port=None, key_file=None, cert_file=None, **kw):
-        HTTPConnection.__init__(self, host, port, **kw)
+        HTTPSLibConnection.__init__(self, host, port, **kw)
         self.key_file = key_file
         self.cert_file = cert_file
         if not hasattr(self, "source_address"):
